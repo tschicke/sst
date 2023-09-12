@@ -55,6 +55,7 @@ export interface RuntimeHandler {
     | {
         type: "success";
         handler: string;
+        layers?: string[];
         sourcemap?: string;
       }
     | {

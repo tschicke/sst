@@ -81,6 +81,7 @@ const supportedRuntimes = {
   java11: CDKRuntime.JAVA_11,
   java17: CDKRuntime.JAVA_17,
   "go1.x": CDKRuntime.PROVIDED_AL2,
+  "bun1.x": CDKRuntime.PROVIDED_AL2,
   go: CDKRuntime.PROVIDED_AL2,
 };
 
@@ -913,6 +914,14 @@ export class Function extends CDKFunction implements SSTConstruct {
               `Failed to build function "${props.handler}"`,
               ...result.errors,
             ].join("\n")
+          );
+        }
+
+        if (result.layers) {
+          this.addLayers(
+            ...result.layers.map((arn) =>
+              LayerVersion.fromLayerVersionArn(this, "BunLayer", arn)
+            )
           );
         }
 

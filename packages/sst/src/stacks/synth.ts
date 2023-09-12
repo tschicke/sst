@@ -6,6 +6,7 @@ import * as contextproviders from "sst-aws-cdk/lib/context-providers/index.js";
 import path from "path";
 import { VisibleError } from "../error.js";
 import { useDotnetHandler } from "../runtime/handlers/dotnet.js";
+import { useBunHandler } from "../runtime/handlers/bun.js";
 
 interface SynthOptions {
   buildDir?: string;
@@ -32,6 +33,7 @@ export async function synth(opts: SynthOptions) {
     useNodeHandler();
     useGoHandler();
     useContainerHandler();
+    useBunHandler();
     usePythonHandler();
     useJavaHandler();
     useDotnetHandler();
